@@ -16,7 +16,7 @@
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-   </head>
+  </head>
   <body>
       スタッフ追加<br>
       <br>
@@ -25,10 +25,11 @@
           <input type="text" name="name" style="width:200px"><br>
           パスワードを入力してください<br>
           <input type="text" name="pass" style="width:100px"><br>
-          パスワードをもう一度入力してください念のため本当に最後にもう一度
+          パスワードをもう一度入力してください念のため本当に最後にもう一度<br>
           <input type="text" name="pass2" style="width:100px"><br>
           <br>
-          <input type="button" onclick="history.bock()" value="もどる">
+          <input type="button" onclick="history.back()" value="戻る">
+          
           <input type="submit" value="OK">
       </form>
   </body>
