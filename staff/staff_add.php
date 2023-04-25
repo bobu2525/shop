@@ -18,6 +18,8 @@
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
    </head>
   <body>
-         
+          スタッフ追加<br>
+            <br>
+            <form method=""></form>
   </body>
 </html>
