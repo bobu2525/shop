@@ -31,16 +31,16 @@
         // try設定
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $staff_code = $_GET['staffcode'];
+
 
         // レコードを指定
         $sql ='SELECT code,name FROM mst_staff WHERE code=?';
 
         // SQL文を実行するための準備
         $stmt = $dbh->prepare($sql);
-        
+        $staff_code = $_GET['staffcode'];
         $data[]=$staff_code;
-
+    
         // SQL文を実行し結果を取得
         $stmt->execute($data);
 
