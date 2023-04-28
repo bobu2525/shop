@@ -19,19 +19,38 @@
    </head>
   <body>
   <?php
+      // ｔｒｙプログラム内での発生する例外をキャッチして適切なエラーハンドリングを行うための構文
       try
       {
+        // データーベー接続
         $dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
         $user ='root';
         $password ='araiofficeDaisaku208';
         $dbh = new PDO($dsn, $user, $password);
+
+        // try設定
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      
-        $sql ='SELECT name FROM mst_staff WHERE 1';
+
+        // レコードを指定
+        $sql ='SELECT code,name FROM mst_staff WHERE 1';
+
+        // SQL文を実行するための準備
         $stmt = $dbh->prepare($sql);
+
+        // SQL文を実行し結果を取得
         $stmt->execute();
 
+        // データーベース接続終了
+        $dbh = null;
+       
+        //画面に文字を出す 
         print 'スタッフ一覧<br><br>';
+
+        // スタッフ修正ページリンク
+        print'<form msthod="post" action="staff_edit.php">';
+
+        // このコードはSQL SELECT分で取得した結果をfetch(データーベースの結果セットから１つの列を取得)
+        // whileのループは取得した１行分の結果（連想配列）を$rec変数に格納していきます。$recがfalseである場合、ループを抜けます。
 
         while(true)
         {  
@@ -41,15 +60,22 @@
           {
             break;
           }
+          // ラジオボタン
+          // どのスタッフを選んだかをとび先で分かるようにしています、スタッフコードを渡す
+          print '<input type="radio" name="staffcode" value="'.$rec['code'].'">';
           print $rec['name'];
           print '<br>';
         }
         
+        // 修正ボタン
+        print '<input type="submit" value="修正">';
+
         $dbh = null;
       }
+      // tryブロック内でエラーがしたときユーザに表示、プログラムの実行を終了
       catch(Exception $e)
       { 
-        print 'ただいま障害の為大変ご迷惑おかけしております。';
+        print 'ただいま障害の為大変ご迷惑かけしておりす。';
         exit();
       } 
       ?>
