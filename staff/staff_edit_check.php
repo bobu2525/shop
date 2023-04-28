@@ -19,9 +19,14 @@
    </head>
   <body>
       <?php
+
+      // ｔｒｙプログラム内での発生する例外をキャッチして適切なエラーハンドリングを行うための構文
+      try
+      {
+      $staff_code=$_POST['code'];
       $staff_name=$_POST['name'];
       $staff_pass=$_POST['pass'];
-      $staff_pass2=$_POST['pass2'];
+      $staff_pass=$_POST['pass2'];
 
       $staff_name= htmlspecialchars($staff_name,ENT_QUOTES,'UTF-8');
       $staff_pass= htmlspecialchars($staff_pass,ENT_QUOTES,'UTF-8');
@@ -57,7 +62,8 @@
       else
       {
         $staff_pass=md5($staff_pass);
-        print'<form method="post" action="staff_add_done.php">';
+        print'<form method="post" action="staff_edit_done.php">';
+        print'<input tupe="hiidde" name="code" value="'.$staff_code.'">';
         print'<input type="hidden" name="name" value="' . $staff_name . '">';
         print'<input type="hidden" name="pass" value="'. $staff_pass . '">';
         print'<br>';
@@ -66,6 +72,13 @@
         print'<input type="submit" value="OK">';
         print'</form>';
       }
+    }
+    // tryブロック内でエラーがしたときユーザに表示、プログラムの実行を終了
+    catch(Exception $e)
+    { 
+      print 'ただいま障害の為大変ご迷惑かけしておりす。';
+      exit();
+    } 
       ?>
 
       
