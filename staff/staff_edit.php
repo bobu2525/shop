@@ -18,6 +18,67 @@
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
    </head>
   <body>
-         
+  <?php
+      // ｔｒｙプログラム内での発生する例外をキャッチして適切なエラーハンドリングを行うための構文
+      try
+      {
+        // データーベー接続
+        $dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
+        $user ='root';
+        $password ='araiofficeDaisaku208';
+        $dbh = new PDO($dsn, $user, $password);
+
+        // try設定
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $staff_code = $_GET['staffcode'];
+
+        // レコードを指定
+        $sql ='SELECT code,name FROM mst_staff WHERE code=?';
+
+        // SQL文を実行するための準備
+        $stmt = $dbh->prepare($sql);
+        
+        $data[]=$staff_code;
+
+        // SQL文を実行し結果を取得
+        $stmt->execute($data);
+
+        $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+        $staff_name=$rec['name'];
+
+
+        // データーベース接続終了
+        $dbh = null;
+      
+      }
+      // tryブロック内でエラーがしたときユーザに表示、プログラムの実行を終了
+      catch(Exception $e)
+      { 
+        print 'ただいま障害の為大変ご迷惑かけしておりす。';
+        exit();
+      } 
+      ?>     
+      スタッフ修正<br>
+      <br>
+      スタッフコード<br>
+      <?php print $staff_code; ?>
+      <br>
+      <br>
+      <form method="post" action="staff_edit_check.php">
+        <input type="hidden" name="code" value="<?php print $staff_code;?>">
+        スタッフ名<br>
+        <input type="text" name="name" style="width:200px" value="<?php print $staff_name;?>"><br>
+
+        パスワードを入力してください<br>
+          <input type="text" name="pass" style="width:100px"><br>
+          パスワードをもう一度入力してください念のため本当に最後にもう一度<br>
+          <input type="text" name="pass2" style="width:100px"><br>
+          <br>
+          <input type="button" onclick="history.back()" value="戻る">
+          
+          <input type="submit" value="OK">
+      </form>
+
   </body>
 </html>
