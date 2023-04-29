@@ -45,9 +45,9 @@
        
         //画面に文字を出す 
         print 'スタッフ一覧<br><br>';
-
-        // スタッフ修正ページリンク
-        print'<form msthod="post" action="staff_edit.php">';
+       
+        // 分岐用画面（画面には表示されない）
+        print'<form method="post" action="staff_branch.php">';
 
         // このコードはSQL SELECT分で取得した結果をfetch(データーベースの結果セットから１つの列を取得)
         // whileのループは取得した１行分の結果（連想配列）を$rec変数に格納していきます。$recがfalseである場合、ループを抜けます。
@@ -67,8 +67,11 @@
           print '<br>';
         }
         
-        // 修正ボタン
-        print '<input type="submit" value="修正">';
+        // 修正ボタン.削除ボタン
+        print '<input type="submit" name="edit" value="修正">';
+        print '<input type="submit" name="delete" value="抹消">';
+
+       
 
         $dbh = null;
       }

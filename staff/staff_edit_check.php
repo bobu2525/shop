@@ -26,7 +26,7 @@
       $staff_code=$_POST['code'];
       $staff_name=$_POST['name'];
       $staff_pass=$_POST['pass'];
-      $staff_pass=$_POST['pass2'];
+      $staff_pass2=$_POST['pass2'];
 
       $staff_name= htmlspecialchars($staff_name,ENT_QUOTES,'UTF-8');
       $staff_pass= htmlspecialchars($staff_pass,ENT_QUOTES,'UTF-8');
@@ -63,7 +63,7 @@
       {
         $staff_pass=md5($staff_pass);
         print'<form method="post" action="staff_edit_done.php">';
-        print'<input tupe="hiidde" name="code" value="'.$staff_code.'">';
+        print'<input type="hidden" name="code" value="'.$staff_code.'">';
         print'<input type="hidden" name="name" value="' . $staff_name . '">';
         print'<input type="hidden" name="pass" value="'. $staff_pass . '">';
         print'<br>';
