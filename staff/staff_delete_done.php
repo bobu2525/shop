@@ -16,45 +16,52 @@
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-   </head>
+  </head>
   <body>
-      <?php
-      // try
-      // {
-      
-          $staff_code =$_POST['code'];
+    <!-- スタッフ情報を消去する為の処理 -->
+    <?php
+      // エラー発生時にエラーメッセ時を表示
+      try
+      {
+        // HTTP POSTリクエストで送信されたフォームのcodeフィールドから値を取得
+        // $staff_code変数に割り当てます
+        $staff_code =$_POST['code'];
         
-      
-          $dsn = 'mysql:dbname=shop;host=localhost;charset=utf8mb4';
-          $user = 'root';
-          $password = 'araiofficeDaisaku208';
-          $dbh = new PDO($dsn, $user, $password);
-          $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // PDOオブジェクトが使用するデーターソース名、ホスト名、
+        // 文字エンコーディングを含むDSN(データベースに接続するために必要な情報を含む文字列)を設定しています
+        $dsn = 'mysql:dbname=shop;host=localhost;charset=utf8mb4';
+        $user = 'root';
+        $password = 'araiofficeDaisaku208';
+        $dbh = new PDO($dsn, $user, $password);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           
-          $sql = 'DELETE FROM mst_staff WHERE code=?';
-          $stmt = $dbh->prepare($sql);
-          $data[] = $staff_code;
-          $stmt->execute($data);
-      
 
-      $dbh = null;
+        // データーベースからデータを削除する為の処理
+        $sql = 'DELETE FROM mst_staff WHERE code=?';
+        $stmt = $dbh->prepare($sql);
+        $data[] = $staff_code;
+        $stmt->execute($data);
+        
+        $dbh = null;
+        // リダイレクト
 
-      header('Location: staff_list.php');
+        header('Location: staff_list.php');
      
-      exit();
+        exit();
+      }
 
-      // }
+      // tryブロック内で例外が発生したときにエラーメッセージを表示(ただいま節電中の為サーバー不通でござるWw)して
+      // プログラムを終了する為のエラーハンドリング処理
+      catch (Exception $e)
+      {
+        print 'ただいま節電中の為サーバー不通でござるWw';
+         exit();
+      }
 
-      // catch (Exception $e)
-      // {
-        // print 'ただいま節電中の為サーバー不通でござるWw';
-        // exit();
-      // }
-
-      ?> 
-      <h1>抹消しました手数料１００円</h1><br><br>
+    ?> 
+    <h1>抹消しました手数料１００円</h1><br><br>
       
-      <a href="staff_list.php">スタッフ一覧に戻る</a>
+    <a href="staff_list.php">スタッフ一覧に戻る</a>
 
   </body>
 </html>
