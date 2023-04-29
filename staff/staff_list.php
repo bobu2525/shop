@@ -67,7 +67,8 @@
           print '<br>';
         }
         
-        // 修正ボタン.削除ボタン.追加ボタン
+        // 修正ボタン.削除ボタン.追加ボタン.参照ボタン
+        print '<input type="submit" name="disp" value="参照">';
         print '<input type="submit" name="add" value="追加">';
         print '<input type="submit" name="edit" value="修正">';
         print '<input type="submit" name="delete" value="抹消">';
